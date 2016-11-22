@@ -1,15 +1,14 @@
 package org.itschoolhillel.dnepropetrovsk.hashmapexample;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by stephenvolf on 19/11/16.
  */
 public class InputFile {
     private final String fileName;
-    private final Map<String, Integer> contents = new HashMap<>();
+    private final Map<String, List<Integer>> contents = new HashMap<>();
 
     InputFile(String fileName) {
         this.fileName = fileName;
@@ -22,18 +21,27 @@ public class InputFile {
                 new InputStreamReader(new FileInputStream(file)));
         String line;
         while ((line = reader.readLine()) != null) {
-            if(!line.isEmpty()){
+            if (!line.isEmpty()) {
                 String[] keyValue = line.split(" ");
-                if(keyValue.length >= 2){
-                    contents.put(keyValue[0], Integer.valueOf(keyValue[1]));
+                if (keyValue.length >= 1) {
+                    if (!contents.containsKey(keyValue[0])) {
+                        contents.put(keyValue[0], new LinkedList<>());
+                    }
+                    for (int i = 1; i < keyValue.length; i++) {
+                        try {
+                            contents.get(keyValue[0]).add(Integer.valueOf(keyValue[i]));
+                        } catch (NumberFormatException e) {
+                            System.err.println(keyValue[i] + " is not a number");
+                        }
+                    }
                 }
             }
         }
     }
 
-    public void print(){
-        for(Map.Entry<String, Integer> entry : contents.entrySet()){
-            System.out.println(entry.getKey() + " - " + entry.getValue());
+    public void print() {
+        for (Map.Entry<String, List<Integer>> entry : contents.entrySet()) {
+            System.out.println(entry.getKey() + " - " + Arrays.toString(entry.getValue().toArray()));
         }
     }
 }

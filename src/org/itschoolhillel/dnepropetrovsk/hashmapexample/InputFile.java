@@ -1,5 +1,7 @@
 package org.itschoolhillel.dnepropetrovsk.hashmapexample;
 
+import org.itschoolhillel.dnepropetrovsk.hashmapexample.entity.TextFile;
+
 import java.io.*;
 import java.util.*;
 
@@ -19,23 +21,29 @@ public class InputFile {
 
         BufferedReader reader = new BufferedReader(
                 new InputStreamReader(new FileInputStream(file)));
-        String line;
-        while ((line = reader.readLine()) != null) {
+        String line = reader.readLine();
+
+        TextFile text = new TextFile("filename", null, null);
+        List<String> strings = text.lines();
+
+        while (line != null) {
             if (!line.isEmpty()) {
                 String[] keyValue = line.split(" ");
                 if (keyValue.length >= 1) {
-                    if (!contents.containsKey(keyValue[0])) {
+                    if (contents.get(keyValue[0]) == null) {
                         contents.put(keyValue[0], new LinkedList<>());
                     }
                     for (int i = 1; i < keyValue.length; i++) {
+                        List<Integer> valuesList = contents.get(keyValue[0]);
                         try {
-                            contents.get(keyValue[0]).add(Integer.valueOf(keyValue[i]));
+                            valuesList.add(Integer.valueOf(keyValue[i]));
                         } catch (NumberFormatException e) {
                             System.err.println(keyValue[i] + " is not a number");
                         }
                     }
                 }
             }
+            line = reader.readLine();
         }
     }
 

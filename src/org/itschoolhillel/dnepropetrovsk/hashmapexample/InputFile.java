@@ -17,16 +17,9 @@ public class InputFile {
     }
 
     public void read() throws IOException {
-        File file = new File(fileName);
+        TextFile text = new TextFile(fileName);
 
-        BufferedReader reader = new BufferedReader(
-                new InputStreamReader(new FileInputStream(file)));
-        String line = reader.readLine();
-
-        TextFile text = new TextFile("filename", null, null);
-        List<String> strings = text.lines();
-
-        while (line != null) {
+        for (String line : text.lines()) {
             if (!line.isEmpty()) {
                 String[] keyValue = line.split(" ");
                 if (keyValue.length >= 1) {
@@ -43,7 +36,6 @@ public class InputFile {
                     }
                 }
             }
-            line = reader.readLine();
         }
     }
 

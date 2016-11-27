@@ -1,7 +1,10 @@
 package org.itschoolhillel.dnepropetrovsk.hashmapexample;
 
-import java.io.File;
+import org.itschoolhillel.dnepropetrovsk.hashmapexample.entity.MyDirectory;
+import org.itschoolhillel.dnepropetrovsk.hashmapexample.entity.SimpleDirectory;
+
 import java.io.IOException;
+import java.util.Arrays;
 
 /**
  * Created by stephenvolf on 19/11/16.
@@ -9,8 +12,12 @@ import java.io.IOException;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        InputFile inputFile = new InputFile("./resources/input.txt");
-        inputFile.read();
-        inputFile.print();
+//        InputFile inputFile = new InputFile("./resources/input.txt");
+//        inputFile.read();
+//        inputFile.print();
+
+        MyDirectory dir = new SimpleDirectory("./resources", null);
+        dir.init();
+        System.out.println(Arrays.toString(dir.listNames().toArray()));
     }
 }

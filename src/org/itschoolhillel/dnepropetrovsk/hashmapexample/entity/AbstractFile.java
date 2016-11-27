@@ -1,5 +1,6 @@
 package org.itschoolhillel.dnepropetrovsk.hashmapexample.entity;
 
+import java.io.File;
 import java.util.Date;
 
 /**
@@ -8,13 +9,20 @@ import java.util.Date;
 public abstract class AbstractFile implements MyFile {
 
     private final String name;
-    private final Long size;
-    private final Date createdDate;
+    private final File file;
 
-    public AbstractFile(String name, Long size, Date createdDate){
+    public AbstractFile(String name){
         this.name = name;
-        this.size = size;
-        this.createdDate = createdDate;
+        this.file = new File(name);
+    }
+
+    public AbstractFile(File file){
+        this.name = file.getName();
+        this.file = file;
+    }
+
+    protected File file(){
+        return this.file;
     }
 
     @Override
@@ -24,11 +32,11 @@ public abstract class AbstractFile implements MyFile {
 
     @Override
     public Long size() {
-        return size;
+        return 0L;
     }
 
     @Override
     public Date createdDate() {
-        return createdDate;
+        return new Date();
     }
 }

@@ -1,7 +1,6 @@
 package org.itschoolhillel.dnepropetrovsk.hashmapexample.entity;
 
 import java.io.*;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -9,12 +8,12 @@ import java.util.List;
  * Created by stephenvolf on 23/11/16.
  */
 public class TextFile extends AbstractFile {
-    public TextFile(String name, Long size, Date createdDate) {
-        super(name, size, createdDate);
+    public TextFile(String name) {
+        super(name);
     }
 
-    public TextFile(String name) {
-        super(name, null, null);
+    public TextFile(File file){
+        super(file);
     }
 
     public List<String> lines() {

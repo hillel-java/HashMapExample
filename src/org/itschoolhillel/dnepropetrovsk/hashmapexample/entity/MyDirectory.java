@@ -9,5 +9,5 @@ public interface MyDirectory extends MyFile {
 
     void addFile(MyFile file);
     List<String> listNames();
-
+    void init();
 }
